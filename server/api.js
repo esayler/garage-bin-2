@@ -14,7 +14,7 @@ router.get('/items', (req, res) => {
     .where('deleted', false)
     .then(items => {
       if (items.length === 0) {
-        res.sendStatus(404)
+        res.status(404).json({ error: 'not found' })
       } else {
         res.status(200).json(ItemSerializer.serialize(items))
       }

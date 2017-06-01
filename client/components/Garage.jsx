@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 export default class Garage extends React.Component {
   constructor() {
     super()
@@ -9,6 +8,11 @@ export default class Garage extends React.Component {
       reason: '',
       cleanliness: 'Dusty',
     }
+  }
+
+  componentDidMount() {
+    this.props.clearItems()
+    this.props.getItems()
   }
 
   handleSubmit = () => {
@@ -36,6 +40,17 @@ export default class Garage extends React.Component {
   }
 
   render() {
+    let items = this.props.items ? this.props.items.map(item => {
+      return (
+        <div className='content item'>
+          <h1 className='item-id'>{item.id}</h1>
+          <h1 className='item-name'>{item.attributes.name}</h1>
+          <p className='item-reason'>{item.attributes.reason}</p>
+          <p className='item-cleanliness'>{item.attributes.cleanliness}</p>
+        </div>
+      )
+    }) : 'No items to display'
+
     return (
       <div>
         <section className='form'>
@@ -71,6 +86,7 @@ export default class Garage extends React.Component {
         </section>
 
         <section className='items-list'>
+          {items}
         </section>
       </div>
     )

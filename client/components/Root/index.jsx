@@ -2,7 +2,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { Route, Link, Switch } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
-import Garage from '../Garage'
+import GarageContainer from '../../containers/GarageContainer'
 import NotFound from '../NotFound'
 import Home from '../Home'
 
@@ -22,7 +22,7 @@ export default class Root extends React.Component {
             <div>
               <Switch>
                 <Route exact path='/' component={Home} />
-                <Route path='/garage' component={Garage} />
+                <Route path='/garage' component={GarageContainer} />
                 <Route component={NotFound} />
               </Switch>
             </div>

@@ -1,13 +1,13 @@
 const items = (state = [], action) => {
   switch (action.type) {
-    case 'APPEND_ITEMS_PENDING':
+    case 'GET_ITEMS_PENDING':
       return state
-    case 'APPEND_ITEMS_FULFILLED':
+    case 'GET_ITEMS_FULFILLED':
       return state.concat(action.payload.data)
-    case 'APPEND_TRACKS_REJECTED':
+    case 'GET_ITEMS_REJECTED':
       return state
     case 'REMOVE_ITEMS':
-      return action.data
+      return action.payload
     default:
       return state
   }
