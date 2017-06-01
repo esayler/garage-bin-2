@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash'
 
 export default class Garage extends React.Component {
   constructor() {
@@ -41,6 +42,7 @@ export default class Garage extends React.Component {
   }
 
   render() {
+
     let items = this.props.items ? this.props.items.map(item => {
       return (
         <div className='content item'>
@@ -51,6 +53,18 @@ export default class Garage extends React.Component {
         </div>
       )
     }) : 'No items to display'
+
+    let totalCount = this.props.items.length
+    let dustyCount = this.props.items.reduce((acc, curr) => {
+      return curr.attributes.cleanliness === 'Dusty' ? acc + 1 : acc
+    }, 0)
+    let sparklingCount = this.props.items.reduce((acc, curr) => {
+      return curr.attributes.cleanliness === 'Sparkling' ? acc + 1 : acc
+    }, 0)
+    let rancidCount = this.props.items.reduce((acc, curr) => {
+      return curr.attributes.cleanliness === 'Rancid' ? acc + 1 : acc
+    }, 0)
+
 
     return (
       <div>
@@ -84,6 +98,13 @@ export default class Garage extends React.Component {
           >
             Submit
           </button>
+        </section>
+
+        <section className='stats'>
+          <div className='total-count'>Total: {totalCount}</div>
+          <div className='dusty-count'>Dusty: {dustyCount}</div>
+          <div className='sparkling-count'>Sparkling: {sparklingCount}</div>
+          <div className='rancid-count'>Rancid: {rancidCount}</div>
         </section>
 
         <section className='items-list'>
