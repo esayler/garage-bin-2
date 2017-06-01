@@ -5,11 +5,14 @@ const bodyParser = require('body-parser')
 // const fs = require('fs')
 const path = require('path')
 const environment = process.env.NODE_ENV || 'development'
-const configuration = require('./knexfile')[environment]
-const knex = require('knex')(configuration)
 // const historyFallback = require('connect-history-api-fallback')
 
 app.use(cors())
+
+if (process.env.NODE_ENV === 'development') {
+  const morgan = require('morgan')
+  app.use(morgan('dev'))
+}
 
 if (environment !== 'production') {
   console.log(environment)
@@ -44,8 +47,6 @@ app.listen(app.get('port'), () => {
 const api = require('./api')
 
 app.use('/api/v1', api)
-
-
 
 // display app at the root and all other routes
 app.get('*', function (request, response) {

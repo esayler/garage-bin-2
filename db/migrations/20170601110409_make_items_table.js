@@ -3,14 +3,14 @@ exports.up = function (knex, Promise) {
     table.increments('id').primary()
     table.string('name')
     table.text('reason')
-    table.enu('cleanliness', ['Sparking', 'Dusty', 'Rancid'])
+    table.enu('cleanliness', ['Sparkling', 'Dusty', 'Rancid'])
     table.boolean('deleted').defaultTo(false)
     table.timestamps(true, true)
   })
 }
 
 exports.down = function (knex, Promise) {
-  return knex.schema.dropTable('ingredients')
+  return knex.schema.dropTable('items')
 }
 
 
