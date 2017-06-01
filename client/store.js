@@ -3,7 +3,7 @@ import { routerMiddleware } from 'react-router-redux'
 import rootReducer from './reducers'
 import ReduxThunk from 'redux-thunk'
 import createHistory from 'history/createBrowserHistory'
-
+import promiseMiddleware from 'redux-promise-middleware'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const history = createHistory()
@@ -11,7 +11,7 @@ const history = createHistory()
 
 export default function configureStore(initialState) {
   const store = createStore(rootReducer, composeEnhancers(
-    applyMiddleware(ReduxThunk, routerMiddleware(history))
+    applyMiddleware(ReduxThunk, promiseMiddleware(), routerMiddleware(history))
   ))
 
   if (module.hot) {

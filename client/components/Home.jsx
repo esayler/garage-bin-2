@@ -3,7 +3,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <div className='content'>
-        <p>Hello, World!</p>
+        <p>Click Open to open the garage door!</p>
       </div>
     )
   }
