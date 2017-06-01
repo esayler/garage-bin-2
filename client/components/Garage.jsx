@@ -8,6 +8,7 @@ export default class Garage extends React.Component {
       name: '',
       reason: '',
       cleanliness: 'Dusty',
+      sort: 'asc',
     }
   }
 
@@ -16,9 +17,17 @@ export default class Garage extends React.Component {
     this.props.getItems()
   }
 
+  handleSort = () => {
+    if (this.state.sort === 'asc') {
+      this.setState({ sort: 'desc' })
+    } else {
+      this.setState({ sort: 'asc' })
+    }
+  }
+
   handleSubmit = () => {
     this.resetState()
-    this.props.addItem(this.state)
+    this.props.addItem(_.omit(this.state, 'sort'))
   }
 
   resetState = () => {
@@ -29,30 +38,38 @@ export default class Garage extends React.Component {
     })
   }
 
-  updateName = (e) => {
+  updateName = e => {
     this.setState({ name: e.target.value })
   }
 
-  updateReason = (e) => {
+  updateReason = e => {
     this.setState({ reason: e.target.value })
   }
 
-  updateCleanliness = (e) => {
+  updateCleanliness = e => {
     this.setState({ cleanliness: e.target.value })
   }
 
   render() {
+    let sortedItems = _.orderBy(
+      this.props.items,
+      [item => item.attributes.name.toLowerCase()],
+      [this.state.sort]
+    )
+    console.log(sortedItems)
 
-    let items = this.props.items ? this.props.items.map(item => {
-      return (
-        <div className='content item'>
-          <h1 className='item-id'>{item.id}</h1>
-          <h1 className='item-name'>{item.attributes.name}</h1>
-          <p className='item-reason'>{item.attributes.reason}</p>
-          <p className='item-cleanliness'>{item.attributes.cleanliness}</p>
-        </div>
-      )
-    }) : 'No items to display'
+    let items = sortedItems
+      ? sortedItems.map(item => {
+        return (
+          <div className='content item' key={item.id}>
+            <h1 className='item-id'>{item.id}</h1>
+            <h1 className='item-name'>{item.attributes.name}</h1>
+            <p className='item-reason'>{item.attributes.reason}</p>
+            <p className='item-cleanliness'>{item.attributes.cleanliness}</p>
+          </div>
+        )
+      })
+      : 'No items to display'
 
     let totalCount = this.props.items.length
     let dustyCount = this.props.items.reduce((acc, curr) => {
@@ -64,7 +81,6 @@ export default class Garage extends React.Component {
     let rancidCount = this.props.items.reduce((acc, curr) => {
       return curr.attributes.cleanliness === 'Rancid' ? acc + 1 : acc
     }, 0)
-
 
     return (
       <div>
@@ -93,9 +109,7 @@ export default class Garage extends React.Component {
             <option value='Rancid'>Rancid</option>
             <option value='Sparkling'>Sparkling</option>
           </select>
-          <button
-            onClick={e => this.handleSubmit()}
-          >
+          <button className='form-submit' onClick={e => this.handleSubmit()}>
             Submit
           </button>
         </section>
@@ -105,6 +119,9 @@ export default class Garage extends React.Component {
           <div className='dusty-count'>Dusty: {dustyCount}</div>
           <div className='sparkling-count'>Sparkling: {sparklingCount}</div>
           <div className='rancid-count'>Rancid: {rancidCount}</div>
+          <button className='btn-sort' onClick={e => this.handleSort()}>
+            Sort {this.state.sort === 'asc' ? 'desc' : 'asc'}
+          </button>
         </section>
 
         <section className='items-list'>
