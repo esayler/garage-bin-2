@@ -2,11 +2,11 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const fs = require('fs')
+// const fs = require('fs')
 const path = require('path')
 const environment = process.env.NODE_ENV || 'development'
-// const configuration = require('./knexfile')[environment]
-// const database = require('knex')(configuration)
+const configuration = require('./knexfile')[environment]
+const knex = require('knex')(configuration)
 // const historyFallback = require('connect-history-api-fallback')
 
 app.use(cors())
@@ -40,6 +40,11 @@ app.set('port', process.env.PORT || 3000)
 app.listen(app.get('port'), () => {
   console.log(`We running on ${app.get('port')}.`)
 })
+
+const api = require('./api')
+
+app.use('/api/v1', api)
+
 
 
 // display app at the root and all other routes
