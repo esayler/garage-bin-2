@@ -8,6 +8,8 @@ const items = (state = [], action) => {
       return state
     case 'REMOVE_ITEMS':
       return action.payload
+    case 'ADD_ITEM_FULFILLED':
+      return state.concat(action.payload.data)
     default:
       return state
   }

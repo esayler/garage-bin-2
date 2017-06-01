@@ -17,6 +17,7 @@ export default class Garage extends React.Component {
 
   handleSubmit = () => {
     this.resetState()
+    this.props.addItem(this.state)
   }
 
   resetState = () => {
