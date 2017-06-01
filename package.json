@@ -4,11 +4,10 @@
   "description": "a boilerplate React.js App using Webpack 2, React Router 4, Standard.js linter, and testing with Karma and Mocha/Chai",
   "main": "./src/index.jsx",
   "scripts": {
-    "start": "webpack-dev-server --progress --history-api-fallback",
-    "serve": "npm build && nodemon server/index.js --ignore /src",
+    "start": "npm build && nodemon server/index.js --ignore /client",
     "build": "webpack --progress",
     "watch": "webpack --progress --watch",
-    "lint": "standard",
+    "lint": "eslint .",
     "test": "NODE_ENV=testing karma start"
   },
   "repository": "git@github.com:esayler/react-boilerplate.git",

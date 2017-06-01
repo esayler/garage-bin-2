@@ -7,7 +7,7 @@ module.exports = {
     'react-hot-loader/patch',
     'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
     'webpack/hot/only-dev-server',
-    './src/index.jsx',
+    './client/index.jsx',
   ],
   devtool: 'inline-source-map',
   devServer: {
