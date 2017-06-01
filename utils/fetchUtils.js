@@ -1,5 +1,4 @@
 export const checkStatus = response => {
-  console.log('checking status...', response)
   if (response.status >= 200 && response.status < 300) {
     return response
   } else {
@@ -11,6 +10,5 @@ export const checkStatus = response => {
 
 export const parseJSON = response => {
   let decoded = response.json()
-  console.log('decoded: ', decoded)
   return decoded
 }

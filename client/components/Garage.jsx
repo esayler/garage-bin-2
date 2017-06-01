@@ -1,5 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
+import { Link } from 'react-router-dom'
 
 export default class Garage extends React.Component {
   constructor() {
@@ -56,16 +57,19 @@ export default class Garage extends React.Component {
       [item => item.attributes.name.toLowerCase()],
       [this.state.sort]
     )
-    console.log(sortedItems)
 
     let items = sortedItems
       ? sortedItems.map(item => {
         return (
           <div className='content item' key={item.id}>
-            <h1 className='item-id'>{item.id}</h1>
-            <h1 className='item-name'>{item.attributes.name}</h1>
-            <p className='item-reason'>{item.attributes.reason}</p>
-            <p className='item-cleanliness'>{item.attributes.cleanliness}</p>
+            <h1 className='item-name'>
+              <Link 
+                to={`/item/${item.id}`}
+                onClick={(e) => this.props.setActiveItem(item)}
+              >
+                {item.attributes.name}
+              </Link>
+            </h1>
           </div>
         )
       })

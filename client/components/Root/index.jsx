@@ -3,6 +3,7 @@ import { Provider } from 'react-redux'
 import { Route, Link, Switch } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
 import GarageContainer from '../../containers/GarageContainer'
+import ItemContainer from '../../containers/ItemContainer'
 import NotFound from '../NotFound'
 import Home from '../Home'
 
@@ -23,6 +24,7 @@ export default class Root extends React.Component {
               <Switch>
                 <Route exact path='/' component={Home} />
                 <Route path='/garage' component={GarageContainer} />
+                <Route path='/item/:id' component={ItemContainer} />
                 <Route component={NotFound} />
               </Switch>
             </div>

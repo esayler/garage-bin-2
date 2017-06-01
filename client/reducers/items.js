@@ -10,6 +10,13 @@ const items = (state = [], action) => {
       return action.payload
     case 'ADD_ITEM_FULFILLED':
       return state.concat(action.payload.data)
+    case 'UPDATE_ITEM_FULFILLED':
+      // return state.map(item => {
+      //   if (item.id === action.payload.id) {
+      //     return Object.assign({ })
+      //   }
+      // })
+      return state
     default:
       return state
   }

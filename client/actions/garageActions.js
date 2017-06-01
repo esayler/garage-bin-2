@@ -7,7 +7,6 @@ const getItems = () => (dispatch, getState) => {
       .then(checkStatus)
       .then(parseJSON)
       .then(payload => {
-        console.log(payload)
         return payload
       })
       .catch(error => {
@@ -20,6 +19,13 @@ const clearItems = () => (dispatch, getState) => {
   return dispatch({
     type: 'REMOVE_ITEMS',
     payload: [],
+  })
+}
+
+const setActiveItem = (item) => (dispatch, getState) => {
+  return dispatch({
+    type: 'SET_ACTIVE_ITEM',
+    payload: item,
   })
 }
 
@@ -49,4 +55,4 @@ const addItem = (data) => (dispatch, getState) => {
   })
 }
 
-export default { getItems, clearItems, addItem }
+export default { getItems, clearItems, addItem, setActiveItem }
