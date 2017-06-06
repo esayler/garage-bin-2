@@ -37,14 +37,6 @@ describe('/api/v1', () => {
         res.body.should.be.an('object')
         res.body.data.should.be.an('array')
         res.body.data[0].should.have.property('id').that.is.a('string')
-        res.body.data[0]
-        res.body.data[0].should.have
-          .property('type')
-          .that.is.a('string')
-          .that.equals('items')
-        res.body.should.be.an('object')
-        res.body.data.should.be.an('array')
-        res.body.data[0].should.have.property('id').that.is.a('string')
         res.body.data[0].should.have
           .property('type')
           .that.is.a('string')
@@ -71,13 +63,6 @@ describe('/api/v1', () => {
         res.body.should.be.an('object')
         res.body.data.should.be.an('array')
         res.body.data.should.have.lengthOf(1)
-        res.body.data[0].should.have.property('id').that.is.a('string')
-        res.body.data[0].should.have
-          .property('type')
-          .that.is.a('string')
-          .that.equals('items')
-        res.body.should.be.an('object')
-        res.body.data.should.be.an('array')
         res.body.data[0].should.have.property('id').that.is.a('string')
         res.body.data[0].should.have
           .property('type')
@@ -125,13 +110,6 @@ describe('/api/v1', () => {
             .property('type')
             .that.is.a('string')
             .that.equals('items')
-          res.body.should.be.an('object')
-          res.body.data.should.be.an('array')
-          res.body.data[0].should.have.property('id').that.is.a('string')
-          res.body.data[0].should.have
-            .property('type')
-            .that.is.a('string')
-            .that.equals('items')
           res.body.data[0].attributes.should.have
             .property('name')
             .that.is.a('string')
@@ -173,13 +151,6 @@ describe('/api/v1', () => {
           res.body.should.be.an('object')
           res.body.data.should.be.an('array')
           res.body.data.should.have.lengthOf(1)
-          res.body.data[0].should.have.property('id').that.is.a('string')
-          res.body.data[0].should.have
-            .property('type')
-            .that.is.a('string')
-            .that.equals('items')
-          res.body.should.be.an('object')
-          res.body.data.should.be.an('array')
           res.body.data[0].should.have.property('id').that.is.a('string')
           res.body.data[0].should.have
             .property('type')
