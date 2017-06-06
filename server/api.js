@@ -46,7 +46,6 @@ router.get('/items/:id', (req, res) => {
 
 router.post('/items', (req, res) => {
   const { name, reason, cleanliness } = req.body
-  console.log(chalk.blue('name:', name, cleanliness, reason))
   if (!name || !reason || !cleanliness) {
     res.sendStatus(400)
   } else {
@@ -76,7 +75,7 @@ router.patch('/items/:id', (req, res) => {
     .where('id', id)
     .update({ name, reason, cleanliness }, 'id')
     .then(ids => {
-      return knex('items').where('id', ids[0])
+      return knex('items').where('id', id)
     })
     .then(items => {
       if (items.length === 0) {

@@ -2,10 +2,8 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const bodyParser = require('body-parser')
-// const fs = require('fs')
 const path = require('path')
 const environment = process.env.NODE_ENV || 'development'
-// const historyFallback = require('connect-history-api-fallback')
 
 app.use(cors())
 
@@ -14,7 +12,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
 }
 
-if (environment !== 'production') {
+if (environment === 'development') {
   console.log(environment)
   const webpack = require('webpack')
   const webpackDevMiddleware = require('webpack-dev-middleware')
@@ -32,27 +30,27 @@ if (environment !== 'production') {
     inline: true,
     noInfo: true,
   }))
-  //app.use(historyFallback())
 }
 
-// app.use('/public', express.static(path.join(__dirname, '../public')))
 app.use(express.static(path.join(__dirname, '../public')))
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.set('port', process.env.PORT || 3000)
 
-app.listen(app.get('port'), () => {
-  console.log(`We running on ${app.get('port')}.`)
-})
-
 const api = require('./api')
 
 app.use('/api/v1', api)
 
-// display app at the root and all other routes
 app.get('*', function (request, response) {
   response.sendFile(path.join(__dirname, '..', 'public', 'index.html'))
 })
+
+if (!module.parent) {
+  app.listen(app.get('port'), () => {
+    console.log(`We running on ${app.get('port')}.`)
+  })
+}
+
 
 module.exports = app
